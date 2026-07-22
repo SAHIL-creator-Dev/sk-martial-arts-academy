@@ -1,9 +1,29 @@
-__pycache__/
-*.pyc
-db.sqlite3
-media/
+# Virtual environments
+.venv/
+.audit-venv/
+env/
 venv/
+
+# Environment variables
 .env
-.env.*
+
+# Database
+db.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Static files
 staticfiles/
-*.log
+
+# Media uploads
+media/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
