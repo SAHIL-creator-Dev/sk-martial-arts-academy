@@ -38,7 +38,7 @@ SECRET_KEY = get_env("DJANGO_SECRET_KEY", required=True)
 DEBUG = get_env("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
 
 # Configure allowed hosts via environment variable, comma-separated
-ALLOWED_HOSTS = [h.strip() for h in get_env("DJANGO_ALLOWED_HOSTS", "").split(",") if h.strip()]
+ALLOWED_HOSTS = [h.strip() for h in get_env("DJANGO_ALLOWED_HOSTS","127.0.0.1,localhost", "").split(",") if h.strip()]
 
 # Production security defaults (can be tuned via environment)
 SECURE_SSL_REDIRECT = not DEBUG
@@ -113,17 +113,13 @@ DATABASES = {
 # If a DATABASE_URL environment variable is provided (e.g., Render Postgres),
 # parse it and configure the default database to use PostgreSQL. This keeps
 # SQLite for local development but uses Postgres in production on Render.
-if os.environ.get("DATABASE_URL"):
-    from urllib.parse import urlparse
-    url = urlparse(os.environ["DATABASE_URL"])
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': url.path[1:],
-        'USER': url.username,
-        'PASSWORD': url.password,
-        'HOST': url.hostname,
-        'PORT': url.port or '',
-    }
+import dj_database_url
+
+DATABASES = {
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
+    )
+}
 
 
 # Password validation
