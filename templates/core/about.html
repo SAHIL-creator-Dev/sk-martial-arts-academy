@@ -60,14 +60,35 @@
   </div>
 </section>
 
-<section class="alt-bg">
+<section class="alt-bg dojo-section">
   <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Where We Train</div>
+    <div class="section-head reveal-section">
+      <div class="eyebrow"><i class="fa-solid fa-map-pin"></i> Visit Our Dojo</div>
       <h2>Visit the dojo</h2>
-      <p>Mahed Devta, Near Kiran Hardware, Chhidarwala Main Chowk, Uttarakhand.</p>
+      <p>Discover our training home near Chhidarwala Main Chowk. The academy is easy to reach, with experienced instructors welcoming students of all levels.</p>
     </div>
-    <a href="{% url 'contact' %}" class="btn btn-primary">Get Directions &amp; Contact</a>
+    <div class="dojo-card reveal-section">
+      <div class="dojo-copy">
+        <div>
+          <div class="eyebrow" style="margin-bottom:12px;"><i class="fa-solid fa-location-dot"></i> Dojo address</div>
+          <h3>Mahed Devta, Uttarakhand</h3>
+          <p>Our facility is located near Kiran Hardware at Chhidarwala Main Chowk, offering a welcoming place to learn traditional Renbukai karate.</p>
+        </div>
+        <div class="dojo-address-card">
+          <span class="address-label">Academy address</span>
+          <address>Mahed Devta,<br>Near Kiran Hardware,<br>Chhidarwala Main Chowk,<br>Uttarakhand</address>
+        </div>
+        <div class="dojo-actions">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=Mahed+Devta+Near+Kiran+Hardware+Chhidarwala+Main+Chowk+Uttarakhand" target="_blank" rel="noopener noreferrer">Get Directions</a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Mahed+Devta+Near+Kiran+Hardware+Chhidarwala+Main+Chowk+Uttarakhand" target="_blank" rel="noopener noreferrer">View on Google Maps</a>
+        </div>
+      </div>
+      <div class="dojo-map-block">
+        <div class="dojo-map-frame">
+          <iframe src="https://www.google.com/maps?q=Mahed+Devta+Near+Kiran+Hardware+Chhidarwala+Main+Chowk+Uttarakhand&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Google map of S.K Martial Arts Academy"></iframe>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -81,4 +102,29 @@
   </div>
 </section>
 
+{% block extra_js %}
+<script>
+  (function() {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.dojo-section .reveal-section');
+    if (!items.length) return;
+
+    if (prefersReduce || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(el => observer.observe(el));
+  })();
+</script>
+{% endblock %}
 {% endblock %}

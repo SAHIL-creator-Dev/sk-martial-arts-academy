@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}S.K Martial Arts Academy{% endblock %}</title>
 <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% load static %}
 <link rel="icon" type="image/x-icon" href="{% static 'core/images/favicon.ico' %}">
 </head>
@@ -74,8 +75,18 @@
       <span class="brown"></span><span class="black"></span>
     </div>
     <div class="footer-bottom">
-      <span>&copy; {% now "Y" %} S.K Martial Arts Academy. Reg. No. UK06003122018000756.</span>
-      <span>Karate for All.</span>
+      <div class="footer-meta">
+        <span>&copy; {% now "Y" %} S.K Martial Arts Academy. Reg. No. UK06003122018000756.</span>
+        <span>Karate for All.</span>
+      </div>
+    </div>
+  </div>
+  <div class="developer-ribbon reveal-credit" aria-label="Developer ribbon">
+    <div class="developer-ribbon__inner">
+      <p class="developer-ribbon__copy">Designed &amp; Developed by <a href="https://www.linkedin.com/in/sahil-thapa-107111369" class="developer-ribbon__name" target="_blank" rel="noopener noreferrer"> Sahil Thapa</a></p>
+      <a href="mailto:sahilthapa1008@gmail.com" class="developer-ribbon__link"><i class="fas fa-envelope" aria-hidden="true"></i><span>sahilthapa1008@gmail.com</span></a>
+      <a href="https://github.com/SAHIL-creator-Dev" target="_blank" rel="noopener noreferrer" class="developer-ribbon__link"><i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span></a>
+      <a href="https://www.linkedin.com/in/sahil-thapa-107111369" target="_blank" rel="noopener noreferrer" class="developer-ribbon__link"><i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span></a>
     </div>
   </div>
 </footer>
@@ -85,6 +96,26 @@
   const nav = document.getElementById('mainNav');
   if (toggle) {
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  }
+
+  const developerRibbon = document.querySelector('.developer-ribbon');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (developerRibbon) {
+    if (reduceMotion) {
+      developerRibbon.classList.add('visible');
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(developerRibbon);
+    }
   }
 </script>
 {% block extra_js %}{% endblock %}
