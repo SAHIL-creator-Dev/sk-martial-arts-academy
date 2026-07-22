@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}S.K Martial Arts Academy{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+{% load static %}
+<link rel="icon" type="image/x-icon" href="{% static 'core/images/favicon.ico' %}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="{% url 'home' %}" class="brand">
+      <span class="brand-mark">空手道</span>
+      <span class="brand-text">
+        <strong>S.K Martial Arts</strong>
+        <span>Renbukai Karate-Do · India</span>
+      </span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+      <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+      <a href="{% url 'classes' %}" class="{% if request.resolver_match.url_name == 'classes' %}active{% endif %}">Classes</a>
+      <a href="{% url 'gallery' %}" class="{% if request.resolver_match.url_name == 'gallery' or request.resolver_match.url_name == 'gallery_category' %}active{% endif %}">Gallery</a>
+      <a href="{% url 'updates' %}" class="{% if request.resolver_match.url_name == 'updates' %}active{% endif %}">Updates</a>
+      <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+    </nav>
+    <a href="{% url 'contact' %}" class="header-cta">Get in Touch</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+  <div class="belt-stripe">
+    <span class="white"></span><span class="yellow"></span><span class="orange"></span>
+    <span class="green"></span><span class="blue"></span><span class="purple"></span>
+    <span class="brown"></span><span class="black"></span>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>S.K Martial Arts Academy</h4>
+        <p>Under Renbukai Karate-Do Federation India, affiliated with All Japan Renbukai International. Mahed Devta, Near Kiran Hardware, Chhidarwala Main Chowk, Uttarakhand.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="{% url 'about' %}">About the Dojo</a></li>
+          <li><a href="{% url 'classes' %}">Classes &amp; Batches</a></li>
+          <li><a href="{% url 'gallery' %}">Gallery</a></li>
+          <li><a href="{% url 'updates' %}">Tournaments &amp; Updates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="{% url 'contact' %}">Get in Touch</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="belt-stripe">
+      <span class="white"></span><span class="yellow"></span><span class="orange"></span>
+      <span class="green"></span><span class="blue"></span><span class="purple"></span>
+      <span class="brown"></span><span class="black"></span>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; {% now "Y" %} S.K Martial Arts Academy. Reg. No. UK06003122018000756.</span>
+      <span>Karate for All.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainNav');
+  if (toggle) {
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  }
+</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

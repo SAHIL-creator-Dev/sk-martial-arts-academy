@@ -1,0 +1,150 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-kanji">道</div>
+  <div class="wrap hero-grid">
+    <div class="hero-inner">
+      <div class="eyebrow">Renbukai Karate-Do Federation India</div>
+      <h1>{{ hero_tagline|default:"Discipline is the first kata." }}</h1>
+      <p class="lede">S.K Martial Arts Academy trains karateka of every age in traditional Renbukai karate — grounded in respect, focus, and the belt-by-belt path to black.</p>
+      <div class="hero-actions">
+        <a href="{% url 'classes' %}" class="btn btn-primary">View Classes</a>
+        <a href="{% url 'updates' %}" class="btn btn-ghost">Tournaments &amp; Updates</a>
+      </div>
+      <div class="hero-facts">
+        <div>
+          <div class="fact-num">8</div>
+          <div class="fact-label">Belt Ranks Taught</div>
+        </div>
+        <div>
+          <div class="fact-num">20+</div>
+          <div class="fact-label">Members Registered</div>
+        </div>
+        <div>
+          <div class="fact-num">1</div>
+          <div class="fact-label">Dojo, Uttarakhand</div>
+        </div>
+      </div>
+    </div>
+    <div class="video-frame">
+      {% if hero_embed_url %}
+      <iframe src="https://www.youtube.com/embed/DNFTUtZf1Zc" title="S.K Martial Arts Academy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      {% else %}
+      <div class="video-placeholder">
+        <div class="play-ring">&#9654;</div>
+        <span>Academy video coming soon</span>
+      </div>
+      {% endif %}
+    </div>
+    <p>URL: {{ hero_embed_url }}</p>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Our Programs</div>
+      <h2>Training for every stage</h2>
+      <p>From a child's first stance to advanced grading, every batch follows the same disciplined Renbukai curriculum.</p>
+    </div>
+    {% if programs %}
+    <div class="grid-3">
+      {% for p in programs %}
+      <div class="card">
+        <div class="belt-stripe">
+          <span class="white"></span><span class="yellow"></span><span class="orange"></span>
+          <span class="green"></span><span class="blue"></span><span class="purple"></span>
+          <span class="brown"></span><span class="black"></span>
+        </div>
+        <span class="card-num">0{{ forloop.counter }}</span>
+        <h3>{{ p.name }}</h3>
+        <div class="meta">{{ p.age_group }}{% if p.schedule %} · {{ p.schedule }}{% endif %}</div>
+        <p>{{ p.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card">
+      <p>Class schedules will appear here once added in the academy's admin panel.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if featured_tournaments or featured_updates %}
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What's New</div>
+      <h2>Tournaments &amp; class updates</h2>
+    </div>
+    <div class="update-list">
+      {% for t in featured_tournaments %}
+      <div class="update-row">
+        <div class="u-date">{{ t.date|date:"d M Y" }}</div>
+        <div>
+          <span class="tag">Tournament</span>
+          <h3>{{ t.title }}</h3>
+          <p>{{ t.location }}{% if t.location and t.description %} — {% endif %}{{ t.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+      {% for u in featured_updates %}
+      <div class="update-row">
+        <div class="u-date">{{ u.date|date:"d M Y" }}</div>
+        <div>
+          <span class="tag">Class Update</span>
+          <h3>{{ u.title }}</h3>
+          <p>{{ u.body }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="margin-top:32px;">
+      <a href="{% url 'updates' %}" class="btn btn-ghost">See All Updates</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Instructors</div>
+      <h2>Trained under Renbukai lineage</h2>
+    </div>
+    {% if instructors %}
+    <div class="grid-3">
+      {% for i in instructors %}
+      <div class="instructor">
+        <div class="instructor-photo">
+          {% if i.photo %}<img src="{{ i.photo.url }}" alt="{{ i.name }}">{% else %}{{ i.name|first }}{% endif %}
+        </div>
+        <div>
+          <h3>{{ i.name }}</h3>
+          <div class="rank">{{ i.title }} &middot; {{ i.get_belt_rank_display }}</div>
+          <p>{{ i.bio }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card">
+      <p>Instructor profiles will appear here once added in the academy's admin panel.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="text-align:center;">
+    <div class="section-head" style="margin:0 auto 32px;">
+      <h2>Questions about joining?</h2>
+      <p>Reach out and the academy will tell you more about batches, fees, and upcoming tournaments.</p>
+    </div>
+    <a href="{% url 'contact' %}" class="btn btn-primary">Get in Touch</a>
+  </div>
+</section>
+
+{% endblock %}

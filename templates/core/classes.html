@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+{% block title %}Classes &mdash; S.K Martial Arts Academy{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:72px 0 56px;">
+  <div class="hero-kanji">型</div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Batches &amp; Schedule</div>
+    <h1 style="font-size:clamp(36px,6vw,58px);">Find your <em>batch.</em></h1>
+    <p class="lede">Choose the program that fits your age and goals. All batches follow the same Renbukai grading path toward black belt.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    {% if programs %}
+    <div class="grid-3">
+      {% for p in programs %}
+      <div class="card">
+        <div class="belt-stripe">
+          <span class="white"></span><span class="yellow"></span><span class="orange"></span>
+          <span class="green"></span><span class="blue"></span><span class="purple"></span>
+          <span class="brown"></span><span class="black"></span>
+        </div>
+        <span class="card-num">0{{ forloop.counter }}</span>
+        <h3>{{ p.name }}</h3>
+        <div class="meta">{{ p.age_group }}{% if p.schedule %} · {{ p.schedule }}{% endif %}</div>
+        <p>{{ p.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card">
+      <p>No batches published yet &mdash; add programs like Kids Karate, Teen &amp; Adult Karate, or Self-Defense in the academy's admin panel and they'll appear here automatically.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-head" style="margin:0 auto 32px;">
+      <h2>Fees are collected monthly</h2>
+      <p>Registration, monthly, and dress fees are set by the academy and due by the 5th of every month, as per our membership terms.</p>
+    </div>
+    <a href="{% url 'contact' %}" class="btn btn-primary">Ask About Joining</a>
+  </div>
+</section>
+
+{% endblock %}

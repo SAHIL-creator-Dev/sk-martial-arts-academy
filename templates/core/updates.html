@@ -1,0 +1,86 @@
+{% extends "core/base.html" %}
+{% block title %}Updates &mdash; S.K Martial Arts Academy{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:72px 0 56px;">
+  <div class="hero-kanji">試合</div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Tournaments &amp; Class Updates</div>
+    <h1 style="font-size:clamp(34px,5.5vw,52px);">What's <em>happening.</em></h1>
+    <p class="lede">Upcoming competitions, gradings, and any changes to class timings — all in one place.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Tournaments</div>
+      <h2>Upcoming competitions</h2>
+    </div>
+    {% if upcoming_tournaments %}
+    <div class="update-list">
+      {% for t in upcoming_tournaments %}
+      <div class="update-row">
+        <div class="u-date">{{ t.date|date:"d M Y" }}</div>
+        <div>
+          <h3>{{ t.title }}</h3>
+          {% if t.location %}<p style="color:var(--gold);margin-bottom:6px;">{{ t.location }}</p>{% endif %}
+          <p>{{ t.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card"><p>No upcoming tournaments announced yet &mdash; check back soon.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+{% if past_tournaments %}
+<section class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Past Results</div>
+      <h2>Previous tournaments</h2>
+    </div>
+    <div class="update-list">
+      {% for t in past_tournaments %}
+      <div class="update-row">
+        <div class="u-date">{{ t.date|date:"d M Y" }}</div>
+        <div>
+          <h3>{{ t.title }}</h3>
+          {% if t.location %}<p style="color:var(--gold);margin-bottom:6px;">{{ t.location }}</p>{% endif %}
+          <p>{{ t.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="{% if not past_tournaments %}alt-bg{% endif %}">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Class Updates</div>
+      <h2>Latest from the dojo</h2>
+    </div>
+    {% if class_updates %}
+    <div class="update-list">
+      {% for u in class_updates %}
+      <div class="update-row">
+        <div class="u-date">{{ u.date|date:"d M Y" }}</div>
+        <div>
+          <h3>{{ u.title }}</h3>
+          <p>{{ u.body }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card"><p>No class updates posted yet.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

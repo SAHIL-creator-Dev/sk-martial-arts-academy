@@ -1,0 +1,78 @@
+{% extends "core/base.html" %}
+{% block title %}Gallery &mdash; S.K Martial Arts Academy{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:72px 0 40px;">
+  <div class="hero-kanji">空</div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Gallery</div>
+    <h1 style="font-size:clamp(34px,5.5vw,52px);">Dojo moments from training, grading, and tournaments.</h1>
+    <p class="lede">Browse curated photo albums from the academy. Add new gallery categories and images from the admin panel to keep this page fresh.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Explore Albums</div>
+      <h2>Photo albums</h2>
+      <p>Each album contains highlights from events, classes, and special dojo ceremonies.</p>
+    </div>
+
+    {% if categories %}
+      <div class="grid-3 gallery-grid">
+        {% for category in categories %}
+          <a href="{% url 'gallery_category' category.slug %}" class="gallery-card">
+            <div class="gallery-card-img">
+              {% with category.images.all|first as cover_image %}
+                {% if cover_image %}
+                  <img src="{{ cover_image.image.url }}" alt="{{ category.name }}">
+                {% else %}
+                  <div class="gallery-card-placeholder">No images yet</div>
+                {% endif %}
+              {% endwith %}
+            </div>
+            <div class="card-content">
+              <span class="card-num">Album</span>
+              <h3>{{ category.name }}</h3>
+              {% if category.description %}
+                <p>{{ category.description }}</p>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <p>No gallery albums are available yet. Add gallery categories and images in the admin panel.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Featured</div>
+      <h2>Recent highlights</h2>
+    </div>
+
+    {% if featured_images %}
+      <div class="gallery-grid featured-grid">
+        {% for image in featured_images %}
+          <article class="gallery-item">
+            <img src="{{ image.image.url }}" alt="{{ image.title|default:image.caption }}" />
+            <div class="gallery-item-copy">
+              <h3>{{ image.title|default:"Gallery image" }}</h3>
+              {% if image.caption %}<p>{{ image.caption }}</p>{% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No featured gallery images are available yet.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

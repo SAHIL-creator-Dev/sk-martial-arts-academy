@@ -1,0 +1,84 @@
+{% extends "core/base.html" %}
+{% block title %}About &mdash; S.K Martial Arts Academy{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:72px 0 56px;">
+  <div class="hero-kanji">錬</div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">About the Dojo</div>
+    <h1 style="font-size:clamp(36px,6vw,58px);">Karate <em>for all.</em></h1>
+    <p class="lede">S.K Martial Arts Academy operates under the Renbukai Karate-Do Federation India, affiliated with All Japan Renbukai International, and is a member of the Japan Karate Federation and World Karate Federation. The academy is recognised by the Indian Olympic Association, the International Olympic Committee, and the Ministry of Sports &amp; Youth Affairs, Govt. of India.</p>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Belt Path</div>
+      <h2>Eight ranks, one discipline</h2>
+      <p>Every student progresses through the traditional Renbukai grading system, tracked and tested by our instructors.</p>
+    </div>
+    <div class="belt-legend">
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-white)"></div><span>White</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-yellow)"></div><span>Yellow</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-orange)"></div><span>Orange</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-green)"></div><span>Green</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-blue)"></div><span>Blue</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-purple)"></div><span>Purple</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-brown)"></div><span>Brown</span></div>
+      <div class="belt-item"><div class="belt-swatch" style="background:var(--belt-black)"></div><span>Black</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Instructors</div>
+      <h2>Meet the senseis</h2>
+    </div>
+    {% if instructors %}
+    <div class="grid-3">
+      {% for i in instructors %}
+      <div class="instructor">
+        <div class="instructor-photo">
+          {% if i.photo %}<img src="{{ i.photo.url }}" alt="{{ i.name }}">{% else %}{{ i.name|first }}{% endif %}
+        </div>
+        <div>
+          <h3>{{ i.name }}</h3>
+          <div class="rank">{{ i.title }} &middot; {{ i.get_belt_rank_display }}</div>
+          <p>{{ i.bio }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card">
+      <p>Instructor profiles will appear here once added in the academy's admin panel &mdash; for example Sempai Karan Bhardwaj (Instructor) and Sensei Kamal Bisht, 3rd Dan Black Belt (North India Chief).</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where We Train</div>
+      <h2>Visit the dojo</h2>
+      <p>Mahed Devta, Near Kiran Hardware, Chhidarwala Main Chowk, Uttarakhand.</p>
+    </div>
+    <a href="{% url 'contact' %}" class="btn btn-primary">Get Directions &amp; Contact</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="text-align:center;">
+    <div class="section-head" style="margin:0 auto 32px;">
+      <h2>Follow tournaments &amp; class news</h2>
+      <p>The academy posts grading results, upcoming tournaments, and schedule changes here.</p>
+    </div>
+    <a href="{% url 'updates' %}" class="btn btn-ghost">View Updates</a>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+{% block title %}Contact &mdash; S.K Martial Arts Academy{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:72px 0 40px;">
+  <div class="hero-kanji">連</div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Get in Touch</div>
+    <h1 style="font-size:clamp(34px,5.5vw,52px);">Visit the <em>dojo.</em></h1>
+    <p class="lede">Questions about batches, fees, or grading? Send a message and the academy will get back to you.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap contact-grid">
+    <div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="info-block">
+        <div class="label">Address</div>
+        <div class="val">Mahed Devta, Near Kiran Hardware,<br>Chhidarwala Main Chowk, Uttarakhand</div>
+      </div>
+      <div class="info-block">
+        <div class="label">Instructor</div>
+        <div class="val">Sempai Karan Bhardwaj</div>
+      </div>
+      <div class="info-block">
+        <div class="label">North India Chief</div>
+        <div class="val">Sensei Kamal Bisht, 3rd Dan Black Belt</div>
+      </div>
+      <div class="info-block">
+        <div class="label">Registration</div>
+        <div class="val">Renbukai Karate Society &mdash; Reg. No. UK06003122018000756</div>
+      </div>
+      <div class="info-block">
+        <div class="label">Fees</div>
+        <div class="val">Please submit fees by the 5th of every month.</div>
+      </div>
+    </div>
+
+    <form method="post" class="form-panel">
+      {% csrf_token %}
+      <div class="field full">
+        <label for="{{ form.name.id_for_label }}">Name *</label>
+        {{ form.name }}
+        {{ form.name.errors }}
+      </div>
+      <div class="field full">
+        <label for="{{ form.email.id_for_label }}">Email</label>
+        {{ form.email }}
+      </div>
+      <div class="field full">
+        <label for="{{ form.phone.id_for_label }}">Phone</label>
+        {{ form.phone }}
+      </div>
+      <div class="field full">
+        <label for="{{ form.message.id_for_label }}">Message *</label>
+        {{ form.message }}
+        {{ form.message.errors }}
+      </div>
+      <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;">Send Message</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}
