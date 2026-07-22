@@ -7,7 +7,7 @@
     <div class="hero-inner">
       <div class="eyebrow">Renbukai Karate-Do Federation India</div>
       <h1>{{ hero_tagline|default:"Discipline is the first kata." }}</h1>
-      <p class="lede">S.K Martial Arts Academy trains karateka of every age in traditional Renbukai karate — grounded in respect, focus, and the belt-by-belt path to black.</p>
+      <p class="lede">S.K Martial Arts Academy trains karate, Kick Boxing, and Mix Martial Arts of every age in traditional Renbukai karate — grounded in respect, focus, and the belt-by-belt path to black.</p>
       <div class="hero-actions">
         <a href="{% url 'classes' %}" class="btn btn-primary">View Classes</a>
         <a href="{% url 'updates' %}" class="btn btn-ghost">Tournaments &amp; Updates</a>
@@ -29,7 +29,7 @@
     </div>
     <div class="video-frame">
       {% if hero_embed_url %}
-      <iframe src="https://www.youtube.com/embed/DNFTUtZf1Zc" title="S.K Martial Arts Academy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="{{ hero_embed_url }}" title="S.K Martial Arts Academy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       {% else %}
       <div class="video-placeholder">
         <div class="play-ring">&#9654;</div>
@@ -37,7 +37,6 @@
       </div>
       {% endif %}
     </div>
-    <p>URL: {{ hero_embed_url }}</p>
   </div>
 </section>
 

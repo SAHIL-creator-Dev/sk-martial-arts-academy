@@ -14,7 +14,7 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="{% url 'home' %}" class="brand">
-      <span class="brand-mark">空手道</span>
+      <img src="{% static 'core/images/image.png' %}" alt="S.K Martial Arts logo" class="brand-logo" width="90px" height="90px">
       <span class="brand-text">
         <strong>S.K Martial Arts</strong>
         <span>Renbukai Karate-Do · India</span>
@@ -46,6 +46,11 @@
       <div>
         <h4>S.K Martial Arts Academy</h4>
         <p>Under Renbukai Karate-Do Federation India, affiliated with All Japan Renbukai International. Mahed Devta, Near Kiran Hardware, Chhidarwala Main Chowk, Uttarakhand.</p>
+        <div class="organization-logos">
+          <img src="{% static 'core/images/renbukai.jpeg' %}" alt="Renbukai" class="org-logo">
+          <img src="{% static 'core/images/wkf.jpeg' %}" alt="WKF" class="org-logo">
+          <img src="{% static 'core/images/wako.jpeg' %}" alt="WAKO" class="org-logo">
+        </div>
       </div>
       <div>
         <h4>Explore</h4>
