@@ -116,10 +116,12 @@ def contact(request):
             except Exception:
                 # Log for internal debugging but don't expose exceptions to site visitors
                 logging.exception("Failed to send contact form email")
-                messages.error(request, "An error occurred while sending your message. Please try again later.")
-                return redirect("contact")
+                # Show a user-friendly error message and preserve the form data/validation
+                messages.error(request, "❌ Sorry, we couldn't send your message at the moment. Please try again later.")
+                return render(request, "core/contact.html", {"form": form})
 
-            messages.success(request, "Message sent. We'll get back to you soon.")
+            # On successful send, use PRG and a friendly success message
+            messages.success(request, "✅ Thank you! Your message has been sent successfully. We will contact you soon.")
             return redirect("contact")
     else:
         form = ContactForm()

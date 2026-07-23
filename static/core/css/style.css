@@ -537,6 +537,33 @@ section{padding:88px 0;}
   background:rgba(156,27,27,0.12);margin-bottom:28px;font-size:14px;
 }
 
+/* Form-specific alerts placed inside the form panel so feedback is visually associated with the form */
+.form-alerts{margin-bottom:20px}
+.form-alert{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--bone);
+  padding:12px 14px;
+  border-radius:10px;
+  font-size:14px;
+}
+.form-alert__icon{font-size:16px;line-height:1;display:inline-block;width:22px;text-align:center}
+.form-alert__message{display:block}
+
+/* Success: subtle green accent */
+.form-alert--success{background:rgba(62,122,76,0.08);border-color:rgba(62,122,76,0.14)}
+.form-alert--success .form-alert__icon{color:var(--belt-green)}
+
+/* Error: subtle red accent */
+.form-alert--error{background:rgba(156,27,27,0.08);border-color:rgba(156,27,27,0.14)}
+.form-alert--error .form-alert__icon{color:var(--crimson-bright)}
+
+@media (max-width:640px){
+  .form-alert{padding:10px 12px;font-size:13px}
+  .form-alert__icon{font-size:15px}
+}
+
 /* Contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
 .info-block{margin-bottom:28px;}

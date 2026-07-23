@@ -14,11 +14,6 @@
 <section style="padding-top:0;">
   <div class="wrap contact-grid">
     <div>
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
 
       <div class="info-block">
         <div class="label">Address</div>
@@ -44,6 +39,26 @@
 
     <form method="post" class="form-panel">
       {% csrf_token %}
+
+      {% if messages %}
+        <div class="form-alerts" aria-live="polite">
+          {% for message in messages %}
+            {% comment %}Message tags may contain multiple tags; check for 'success' or 'error' keywords{% endcomment %}
+            {% if message.tags %}
+              {% if 'success' in message.tags %}
+                <div class="form-alert form-alert--success"><span class="form-alert__icon">&#10003;</span><span class="form-alert__message">{{ message }}</span></div>
+              {% elif 'error' in message.tags %}
+                <div class="form-alert form-alert--error"><span class="form-alert__icon">&#9888;</span><span class="form-alert__message">{{ message }}</span></div>
+              {% else %}
+                <div class="form-alert"><span class="form-alert__message">{{ message }}</span></div>
+              {% endif %}
+            {% else %}
+              <div class="form-alert"><span class="form-alert__message">{{ message }}</span></div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <div class="field full">
         <label for="{{ form.name.id_for_label }}">Name *</label>
         {{ form.name }}
