@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Contact Submission</title>
+  </head>
+  <body style="font-family: Arial, Helvetica, sans-serif; color: #222;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center" style="padding: 20px 0;">
+          <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #e5e7eb; border-radius:6px; overflow:hidden;">
+            <tr style="background:#0d6efd; color:#fff;">
+              <td style="padding:18px 24px; font-size:18px; font-weight:600;">New Contact Form Submission</td>
+            </tr>
+            <tr>
+              <td style="padding:20px; background:#fff;">
+                <p style="margin:0 0 12px 0;">A visitor submitted the contact form. Details are below.</p>
+                <table width="100%" cellpadding="6" cellspacing="0" role="presentation" style="border-collapse:collapse;">
+                  <tr>
+                    <td style="background:#f8f9fa; width:160px; font-weight:600;">Name</td>
+                    <td style="background:#f8f9fa;">{{ name }}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:160px; font-weight:600;">Email</td>
+                    <td>{{ email }}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:160px; font-weight:600;">Phone</td>
+                    <td>{{ phone }}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:160px; font-weight:600;">Date &amp; Time</td>
+                    <td>{{ datetime }}</td>
+                  </tr>
+                </table>
+
+                <h4 style="margin-top:18px; margin-bottom:8px;">Message</h4>
+                <div style="padding:12px; border:1px solid #e9ecef; border-radius:4px; background:#fbfdff; white-space:pre-wrap;">{{ message }}</div>
+
+                <p style="margin:18px 0 0 0; color:#6c757d; font-size:13px;">This message was generated automatically from the website contact form.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:12px 20px; background:#f1f3f5; font-size:12px; color:#6c757d;">&copy; SK Martial Arts Academy</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

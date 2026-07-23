@@ -12,6 +12,10 @@ from .models import (
 )
 from .forms import ContactForm
 from .utils import youtube_embed_url
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+import logging
 
 
 def home(request):
@@ -77,7 +81,44 @@ def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Persist the submission (existing behavior)
+            submission = form.save()
+
+            # Prepare email context and content
+            context = {
+                "name": form.cleaned_data.get("name"),
+                "email": form.cleaned_data.get("email"),
+                "phone": form.cleaned_data.get("phone"),
+                "message": form.cleaned_data.get("message"),
+                "datetime": timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S %Z"),
+            }
+
+            subject = f"Website Contact: {context['name']}"
+            html_message = render_to_string("emails/contact_email.html", context)
+
+            # Send to the configured email receiver (use EMAIL_HOST_USER as the recipient if present)
+            to_email = [getattr(settings, "EMAIL_HOST_USER", None)] if getattr(settings, "EMAIL_HOST_USER", None) else [getattr(settings, "DEFAULT_FROM_EMAIL", None)]
+            # Fallback ensure list of non-empty targets
+            to_email = [e for e in to_email if e]
+
+            try:
+                if to_email:
+                    email_message = EmailMessage(
+                        subject=subject,
+                        body=html_message,
+                        from_email=getattr(settings, "DEFAULT_FROM_EMAIL", None) or getattr(settings, "EMAIL_HOST_USER", None),
+                        to=to_email,
+                    )
+                    email_message.content_subtype = "html"
+                    email_message.send(fail_silently=False)
+                else:
+                    logging.warning("No recipient configured for contact emails; skipping send.")
+            except Exception:
+                # Log for internal debugging but don't expose exceptions to site visitors
+                logging.exception("Failed to send contact form email")
+                messages.error(request, "An error occurred while sending your message. Please try again later.")
+                return redirect("contact")
+
             messages.success(request, "Message sent. We'll get back to you soon.")
             return redirect("contact")
     else:

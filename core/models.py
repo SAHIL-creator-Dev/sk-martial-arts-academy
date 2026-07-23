@@ -53,6 +53,8 @@ class Instructor(models.Model):
         except Exception:
             # Do not block save on unexpected sanitizer errors; admin can re-upload if needed.
             pass
+        # Ensure the instance is saved to the database after sanitization
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ["order", "id"]
@@ -82,6 +84,8 @@ class Tournament(models.Model):
             raise
         except Exception:
             pass
+        # Persist tournament to database after sanitizing poster filename
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ["date"]
@@ -147,6 +151,8 @@ class GalleryImage(models.Model):
             raise
         except Exception:
             pass
+        # Persist gallery image after sanitization
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ["order", "id"]

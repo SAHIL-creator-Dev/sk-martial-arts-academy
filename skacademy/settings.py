@@ -146,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -167,3 +167,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default maximum upload size (bytes). Can be overridden with env var DJANGO_MAX_UPLOAD_SIZE
 DEFAULT_MAX_UPLOAD_SIZE = int(get_env("DJANGO_MAX_UPLOAD_SIZE", str(5 * 1024 * 1024)))  # 5 MB default
+
+# Email configuration - read from environment (Gmail SMTP example)
+# Required environment variables (do NOT commit real values):
+# DJANGO_EMAIL_HOST, DJANGO_EMAIL_PORT, DJANGO_EMAIL_HOST_USER, DJANGO_EMAIL_HOST_PASSWORD, DJANGO_DEFAULT_FROM_EMAIL
+EMAIL_HOST = get_env("DJANGO_EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(get_env("DJANGO_EMAIL_PORT", "587"))
+EMAIL_HOST_USER = get_env("DJANGO_EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = get_env("DJANGO_EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = get_env("DJANGO_EMAIL_USE_TLS", "True").lower() in ("1", "true", "yes")
+EMAIL_USE_SSL = get_env("DJANGO_EMAIL_USE_SSL", "False").lower() in ("1", "true", "yes")
+DEFAULT_FROM_EMAIL = get_env("DJANGO_DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+# Optionally override the email backend via env var. Default is SMTP backend.
+EMAIL_BACKEND = get_env("DJANGO_EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
