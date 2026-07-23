@@ -9,6 +9,7 @@ from .models import (
     GalleryCategory,
     GalleryImage,
     SiteSettings,
+    AcademyStatistic,
 )
 from .forms import ContactForm
 from .utils import youtube_embed_url
@@ -32,6 +33,7 @@ def home(request):
         "hero_tagline": settings_obj.hero_tagline,
         "featured_tournaments": featured_tournaments,
         "featured_updates": featured_updates,
+        "statistics": AcademyStatistic.objects.filter(is_active=True).order_by('display_order'),
     })
 
 

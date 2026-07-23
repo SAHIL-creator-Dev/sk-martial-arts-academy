@@ -5,31 +5,27 @@
   <div class="hero-kanji">道</div>
   <div class="wrap hero-grid">
     <div class="hero-inner">
-      <div class="eyebrow">Renbukai Karate-Do Federation India</div>
-      <h1>{{ hero_tagline|default:"Discipline is the first kata." }}</h1>
-      <p class="lede">S.K Martial Arts Academy trains karate, Kick Boxing, and Mix Martial Arts of every age in traditional Renbukai karate — grounded in respect, focus, and the belt-by-belt path to black.</p>
-      <div class="hero-actions">
+      <div class="eyebrow" data-aos="fade-up" data-aos-duration="700">Renbukai Karate-Do Federation India</div>
+      <h1 data-aos="fade-up" data-aos-duration="900">{{ hero_tagline|default:"Discipline is the first kata." }}</h1>
+      <p class="lede" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">Train in traditional Renbukai Karate, Kickboxing, and Mixed Martial Arts under experienced instructors. Build discipline, confidence, fitness, and self-defense skills in a supportive environment for all ages.</p>
+      <div class="hero-actions" data-aos="fade-up" data-aos-duration="900" data-aos-delay="400">
         <a href="{% url 'classes' %}" class="btn btn-primary">View Classes</a>
         <a href="{% url 'updates' %}" class="btn btn-ghost">Tournaments &amp; Updates</a>
       </div>
-      <div class="hero-facts">
+      {% if statistics %}
+      <div class="hero-facts" data-aos="fade-up" data-aos-duration="900" data-aos-delay="600">
+        {% for stat in statistics %}
         <div>
-          <div class="fact-num">8</div>
-          <div class="fact-label">Belt Ranks Taught</div>
+          <div class="fact-num" data-count-target="{{ stat.value }}">0</div>
+          <div class="fact-label">{{ stat.title }}</div>
         </div>
-        <div>
-          <div class="fact-num">20+</div>
-          <div class="fact-label">Members Registered</div>
-        </div>
-        <div>
-          <div class="fact-num">1</div>
-          <div class="fact-label">Dojo, Uttarakhand</div>
-        </div>
+        {% endfor %}
       </div>
+      {% endif %}
     </div>
-    <div class="video-frame">
+    <div class="video-frame" data-aos="fade-left" data-aos-duration="1000">
       {% if hero_embed_url %}
-      <iframe src="{{ hero_embed_url }}" title="S.K Martial Arts Academy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="{{hero_embed_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       {% else %}
       <div class="video-placeholder">
         <div class="play-ring">&#9654;</div>
@@ -42,7 +38,7 @@
 
 <section class="alt-bg">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-aos="fade-up" data-aos-duration="800">
       <div class="eyebrow">Our Programs</div>
       <h2>Training for every stage</h2>
       <p>From a child's first stance to advanced grading, every batch follows the same disciplined Renbukai curriculum.</p>
@@ -50,7 +46,7 @@
     {% if programs %}
     <div class="grid-3">
       {% for p in programs %}
-      <div class="card">
+      <div class="card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' '700' '800' '900' %}">
         <div class="belt-stripe">
           <span class="white"></span><span class="yellow"></span><span class="orange"></span>
           <span class="green"></span><span class="blue"></span><span class="purple"></span>
@@ -74,13 +70,13 @@
 {% if featured_tournaments or featured_updates %}
 <section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-aos="fade-up" data-aos-duration="800">
       <div class="eyebrow">What's New</div>
       <h2>Tournaments &amp; class updates</h2>
     </div>
     <div class="update-list">
       {% for t in featured_tournaments %}
-      <div class="update-row">
+      <div class="update-row" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{% cycle '80' '160' '240' '320' '400' '480' '560' '640' '720' '800' %}">
         <div class="u-date">{{ t.date|date:"d M Y" }}</div>
         <div>
           <span class="tag">Tournament</span>
@@ -90,7 +86,7 @@
       </div>
       {% endfor %}
       {% for u in featured_updates %}
-      <div class="update-row">
+      <div class="update-row" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{% cycle '320' '400' '480' '560' '640' '720' '800' '880' '960' %}">
         <div class="u-date">{{ u.date|date:"d M Y" }}</div>
         <div>
           <span class="tag">Class Update</span>
@@ -100,7 +96,7 @@
       </div>
       {% endfor %}
     </div>
-    <div style="margin-top:32px;">
+    <div style="margin-top:32px;" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
       <a href="{% url 'updates' %}" class="btn btn-ghost">See All Updates</a>
     </div>
   </div>
@@ -109,14 +105,14 @@
 
 <section class="alt-bg">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-aos="fade-up" data-aos-duration="800">
       <div class="eyebrow">Instructors</div>
       <h2>Trained under Renbukai lineage</h2>
     </div>
     {% if instructors %}
     <div class="grid-3">
       {% for i in instructors %}
-      <div class="instructor">
+      <div class="instructor" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' '700' '800' '900' %}">
         <div class="instructor-photo">
           {% if i.photo %}<img src="{{ i.photo.url }}" alt="{{ i.name }}">{% else %}{{ i.name|first }}{% endif %}
         </div>
@@ -138,11 +134,11 @@
 
 <section>
   <div class="wrap" style="text-align:center;">
-    <div class="section-head" style="margin:0 auto 32px;">
+    <div class="section-head" style="margin:0 auto 32px;" data-aos="fade-up" data-aos-duration="800">
       <h2>Questions about joining?</h2>
       <p>Reach out and the academy will tell you more about batches, fees, and upcoming tournaments.</p>
     </div>
-    <a href="{% url 'contact' %}" class="btn btn-primary">Get in Touch</a>
+    <a href="{% url 'contact' %}" class="btn btn-primary" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">Get in Touch</a>
   </div>
 </section>
 

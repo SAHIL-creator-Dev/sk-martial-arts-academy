@@ -5,15 +5,15 @@
 <section class="hero" style="padding:72px 0 40px;">
   <div class="hero-kanji">空</div>
   <div class="wrap hero-inner">
-    <div class="eyebrow">Gallery</div>
-    <h1 style="font-size:clamp(34px,5.5vw,52px);">Dojo moments from training, grading, and tournaments.</h1>
-    <p class="lede">Browse curated photo albums from the academy. Add new gallery categories and images from the admin panel to keep this page fresh.</p>
+    <div class="eyebrow" data-aos="fade-up" data-aos-duration="700">Gallery</div>
+    <h1 style="font-size:clamp(34px,5.5vw,52px);" data-aos="fade-up" data-aos-duration="900">Dojo moments from training, grading, and tournaments.</h1>
+    <p class="lede" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">Browse curated photo albums from the academy. Add new gallery categories and images from the admin panel to keep this page fresh.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-aos="fade-up" data-aos-duration="800">
       <div class="eyebrow">Explore Albums</div>
       <h2>Photo albums</h2>
       <p>Each album contains highlights from events, classes, and special dojo ceremonies.</p>
@@ -22,7 +22,7 @@
     {% if categories %}
       <div class="grid-3 gallery-grid">
         {% for category in categories %}
-          <a href="{% url 'gallery_category' category.slug %}" class="gallery-card">
+          <a href="{% url 'gallery_category' category.slug %}" class="gallery-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' '700' '800' '900' %}">
             <div class="gallery-card-img">
               {% with category.images.all|first as cover_image %}
                 {% if cover_image %}
@@ -52,7 +52,7 @@
 
 <section class="alt-bg">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-aos="fade-up" data-aos-duration="800">
       <div class="eyebrow">Featured</div>
       <h2>Recent highlights</h2>
     </div>
@@ -60,7 +60,7 @@
     {% if featured_images %}
       <div class="gallery-grid featured-grid">
         {% for image in featured_images %}
-          <article class="gallery-item">
+          <article class="gallery-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' '700' '800' '900' %}">
             <img src="{{ image.image.url }}" alt="{{ image.title|default:image.caption }}" />
             <div class="gallery-item-copy">
               <h3>{{ image.title|default:"Gallery image" }}</h3>

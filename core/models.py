@@ -198,3 +198,18 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.submitted_at:%d %b %Y}"
+
+
+class AcademyStatistic(models.Model):
+    value = models.CharField(max_length=50, help_text='e.g., "8", "20", "1"')
+    title = models.CharField(max_length=100, help_text='e.g., "Belt Ranks Taught"')
+    display_order = models.PositiveIntegerField(default=0, help_text="Controls the display order")
+    is_active = models.BooleanField(default=True, help_text="Allows hiding/showing this statistic")
+
+    class Meta:
+        ordering = ["display_order", "id"]
+        verbose_name = "Academy Statistic"
+        verbose_name_plural = "Academy Statistics"
+
+    def __str__(self):
+        return f"{self.value} - {self.title}"

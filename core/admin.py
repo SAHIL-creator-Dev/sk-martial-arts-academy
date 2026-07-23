@@ -11,6 +11,7 @@ from .models import (
     GalleryImage,
     ContactMessage,
     SiteSettings,
+    AcademyStatistic,
 )
 from .utils import validate_image_file
 
@@ -107,3 +108,11 @@ class GalleryImageAdmin(admin.ModelAdmin):
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "phone", "submitted_at")
+
+
+@admin.register(AcademyStatistic)
+class AcademyStatisticAdmin(admin.ModelAdmin):
+    list_display = ("value", "title", "display_order", "is_active")
+    ordering = ("display_order",)
+    search_fields = ("title",)
+    list_filter = ("is_active",)

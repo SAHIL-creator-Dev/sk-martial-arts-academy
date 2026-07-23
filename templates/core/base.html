@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}S.K Martial Arts Academy{% endblock %}</title>
 <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% load static %}
 <link rel="icon" type="image/x-icon" href="{% static 'core/images/favicon.ico' %}">
@@ -81,7 +82,7 @@
       </div>
     </div>
   </div>
-  <div class="developer-ribbon reveal-credit" aria-label="Developer ribbon">
+  <div class="developer-ribbon reveal-credit" aria-label="Developer ribbon" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
     <div class="developer-ribbon__inner">
       <p class="developer-ribbon__copy">Designed &amp; Developed by <a href="https://www.linkedin.com/in/sahil-thapa-107111369" class="developer-ribbon__name" target="_blank" rel="noopener noreferrer"> Sahil Thapa</a></p>
       <a href="mailto:sahilthapa1008@gmail.com" class="developer-ribbon__link"><i class="fas fa-envelope" aria-hidden="true"></i><span>sahilthapa1008@gmail.com</span></a>
@@ -97,27 +98,72 @@
   if (toggle) {
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
   }
-
-  const developerRibbon = document.querySelector('.developer-ribbon');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (developerRibbon) {
-    if (reduceMotion) {
-      developerRibbon.classList.add('visible');
-    } else {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      observer.observe(developerRibbon);
-    }
-  }
 </script>
+
+<!-- AOS Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Initialize AOS -->
+<script>
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true,
+    disable: 'mobile'
+  });
+</script>
+
+<!-- Count-up Animation for Statistics -->
+<script>
+ function initCountUp() {
+  const targets = document.querySelectorAll("[data-count-target]");
+  if (!targets.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const element = entry.target;
+
+      if (element.hasAttribute("data-animated")) return;
+      element.setAttribute("data-animated", "true");
+
+      const originalValue = element.getAttribute("data-count-target");
+
+      // Extract numeric value only
+      const target = parseInt(originalValue.replace(/\D/g, ""), 10);
+
+      // Keep any suffix such as +, %, K+, etc.
+      const suffix = originalValue.replace(/[0-9]/g, "");
+
+      const duration = 1200;
+      const startTime = Date.now();
+
+      function animate() {
+        const progress = Math.min((Date.now() - startTime) / duration, 1);
+        const current = Math.floor(target * progress);
+
+        element.textContent = current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          // Ensure exact final value
+          element.textContent = originalValue;
+        }
+      }
+
+      animate();
+      observer.unobserve(element);
+    });
+  }, { threshold: 0.1 });
+
+  targets.forEach((target) => observer.observe(target));
+}
+
+document.addEventListener("DOMContentLoaded", initCountUp);
+</script>
+
 {% block extra_js %}{% endblock %}
 </body>
 </html>

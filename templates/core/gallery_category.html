@@ -5,15 +5,15 @@
 <section class="hero" style="padding:72px 0 40px;">
   <div class="hero-kanji">写</div>
   <div class="wrap hero-inner">
-    <div class="eyebrow">{{ category.name }}</div>
-    <h1 style="font-size:clamp(34px,5.5vw,52px);">{{ category.description|default:"Browse the gallery." }}</h1>
-    <p class="lede">Review the academy's latest gallery images and keep an eye on new updates from dojo events.</p>
+    <div class="eyebrow" data-aos="fade-up" data-aos-duration="700">{{ category.name }}</div>
+    <h1 style="font-size:clamp(34px,5.5vw,52px);" data-aos="fade-up" data-aos-duration="900">{{ category.description|default:"Browse the gallery." }}</h1>
+    <p class="lede" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">Review the academy's latest gallery images and keep an eye on new updates from dojo events.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-aos="fade-up" data-aos-duration="800">
       <div class="eyebrow">Album</div>
       <h2>{{ category.name }}</h2>
       {% if category.description %}<p>{{ category.description }}</p>{% endif %}
@@ -22,7 +22,7 @@
     {% if images %}
       <div class="gallery-grid category-grid">
         {% for image in images %}
-          <article class="gallery-item">
+          <article class="gallery-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' '700' '800' '900' %}">
             <img src="{{ image.image.url }}" alt="{{ image.title|default:image.caption }}" />
             <div class="gallery-item-copy">
               <h3>{{ image.title|default:"Gallery image" }}</h3>

@@ -5,9 +5,9 @@
 <section class="hero" style="padding:72px 0 56px;">
   <div class="hero-kanji">型</div>
   <div class="wrap hero-inner">
-    <div class="eyebrow">Batches &amp; Schedule</div>
-    <h1 style="font-size:clamp(36px,6vw,58px);">Find your <em>batch.</em></h1>
-    <p class="lede">Choose the program that fits your age and goals. All batches follow the same Renbukai grading path toward black belt.</p>
+    <div class="eyebrow" data-aos="fade-up" data-aos-duration="700">Batches &amp; Schedule</div>
+    <h1 style="font-size:clamp(36px,6vw,58px);" data-aos="fade-up" data-aos-duration="900">Find your <em>batch.</em></h1>
+    <p class="lede" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">Choose the program that fits your age and goals. All batches follow the same Renbukai grading path toward black belt.</p>
   </div>
 </section>
 
@@ -16,7 +16,7 @@
     {% if programs %}
     <div class="grid-3">
       {% for p in programs %}
-      <div class="card">
+      <div class="card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' '700' '800' '900' %}">
         <div class="belt-stripe">
           <span class="white"></span><span class="yellow"></span><span class="orange"></span>
           <span class="green"></span><span class="blue"></span><span class="purple"></span>
@@ -39,11 +39,11 @@
 
 <section class="alt-bg">
   <div class="wrap" style="text-align:center;">
-    <div class="section-head" style="margin:0 auto 32px;">
+    <div class="section-head" style="margin:0 auto 32px;" data-aos="fade-up" data-aos-duration="800">
       <h2>Fees are collected monthly</h2>
       <p>Registration, monthly, and dress fees are set by the academy and due by the 5th of every month, as per our membership terms.</p>
     </div>
-    <a href="{% url 'contact' %}" class="btn btn-primary">Ask About Joining</a>
+    <a href="{% url 'contact' %}" class="btn btn-primary" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">Ask About Joining</a>
   </div>
 </section>
 
